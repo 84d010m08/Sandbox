@@ -1,0 +1,14 @@
+Release <%= Time.now.strftime("%Y-%m-%d") %>
+
+## コミット対象
+各自が担当した修正が下記一覧にあるかチェックする。
+
+<% pull_requests.each do |pr| -%>
+<%= pr.to_checklist_item %>
+<% end -%>
+
+---
+
+## リリース作業
+
+...
