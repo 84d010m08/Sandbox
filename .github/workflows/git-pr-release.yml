@@ -29,12 +29,12 @@ jobs:
       - name: get branch name
         id: vars
         run: echo "::set-output name=branch_name::${GITHUB_REF#refs/heads/}"
-      # Releaseブランチがプッシュされた場合、Masterブランチに向けたプルリクエストを作成
+      # Release ブランチがプッシュされた場合、Main ブランチに向けたプルリクエストを作成
       - name: Create a release pull request for release branch
         if: contains(steps.vars.outputs.branch_name, 'release')
         env:
           GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIT_PR_RELEASE_BRANCH_PRODUCTION: master
+          GIT_PR_RELEASE_BRANCH_PRODUCTION: main
           GIT_PR_RELEASE_BRANCH_STAGING: ${{ steps.vars.outputs.branch_name }}
           GIT_PR_RELEASE_LABELS: release
           GIT_PR_RELEASE_TEMPLATE: .github/.git-pr-release-template
@@ -53,7 +53,7 @@ jobs:
         run: |
           gem install -N git-pr-release -v "1.9.0"
           git-pr-release --no-fetch
-      # Release, Hotfixそれぞれから、Developブランチに向けたプルリクエストをドラフト状態で作成
+      # Release, Hotfix それぞれから、Develop ブランチに向けたプルリクエストをドラフト状態で作成
       # 差分がなくてもエラーなしで終了する
       - name: Create a develop pull request
         uses: repo-sync/pull-request@v2
