@@ -39,7 +39,7 @@ jobs:
           GIT_PR_RELEASE_LABELS: release
           GIT_PR_RELEASE_TEMPLATE: .github/.git-pr-release-template
         run: |
-          gem install -N git-pr-release -v "1.9.0"
+          gem install -N git-pr-release -v "2.1.1"
           git-pr-release --no-fetch
       # Hotfix ブランチがプッシュされた場合、Main ブランチに向けたプルリクエストを作成
       - name: Create a release pull request for hotfix branch
